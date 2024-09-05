@@ -71,14 +71,21 @@ def full_adder(x: int, y: int, carry: int) -> list:
     carry = or_(c_HA[0], x_y_HA[0])
     return [carry, right_digit]
 
-print(full_adder(0, 0, 0)) # [0, 0]
+def calculator(num1: str, num2: str) -> list:
+    carry = 0
+    result = []
+    #to improve in future: add padding in case numbers aren't same size
+    for i in range(len(num1), 0, -1):
+        x = int(num1[i - 1])
+        y = int(num2[i - 1])
+        sum = full_adder(x, y, carry)
+        carry = sum[0]
+        result = [sum[1]] + result
+        if i == 1 and carry == 1:
+            result = [1] + result
+    return result
 
-print(full_adder(0, 0, 1)) # [0, 1]
-print(full_adder(0, 1, 0)) # [0, 1]
-print(full_adder(1, 0, 0)) # [0, 1]
+num1 = "101010"
+num2 = "101010"
 
-print(full_adder(0, 1, 1)) # [1, 0]
-print(full_adder(1, 1, 0)) # [1, 0]
-print(full_adder(1, 0, 1)) # [1, 0]
-
-print(full_adder(1, 1, 1)) # [1, 1]
+print(calculator(num1, num2))
