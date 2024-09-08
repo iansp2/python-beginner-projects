@@ -1,5 +1,5 @@
 import requests
-from requests import Response, RequestException
+from requests import RequestException
 
 def check_status(url: str) -> None:
     try:
